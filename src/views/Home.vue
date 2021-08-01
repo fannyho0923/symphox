@@ -17,6 +17,12 @@ export default {
       isShow: false
     };
   },
+  created() {
+    this.axios.get("../../static/data.json").then(response => {
+      //   this.listData = response.data;
+      console.log(response.data);
+    });
+  },
   methods: {
     togggle() {
       if (this.isShow) {
