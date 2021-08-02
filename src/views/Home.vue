@@ -74,12 +74,14 @@ export default {
     // 查看訂單
     searchOrder() {
       if (this.isShow) {
+        this.showAdd = false;
         this.showSearch = true;
       }
     },
     // 新增訂單
     addOrder() {
       if (this.isShow) {
+        this.showSearch = false;
         this.showAdd = true;
       }
     }

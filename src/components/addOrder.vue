@@ -4,7 +4,7 @@
       <AddItem />
       <div class="addBtn">+</div>
     </div>
-    <div class="sendBtn" @click="addAllItem"></div>
+    <div class="sendBtn" @click="addAllItem">新增</div>
   </div>
 </template>
 
@@ -38,5 +38,14 @@ export default {
 .itemBox {
   margin-left: 2rem;
   display: flex;
+}
+/* 新增所有item */
+.sendBtn {
+  cursor: pointer;
+  position: fixed;
+  border: solid 1px;
+  padding: 0.5rem 2rem;
+  right: 10%;
+  top: 80%;
 }
 </style>

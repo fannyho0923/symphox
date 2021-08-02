@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <form>
+      <nav>
         <div class="nameBox">
           <label>商品名稱：</label>
           <input type="text" />
@@ -10,8 +10,8 @@
           <label>圖示連結：</label>
           <input type="text" />
         </div>
-        <div>
-          <label>訂單狀態</label>
+        <div class="statusBox">
+          <label>訂單狀態：</label>
           <div class="triangle">
             <select v-model="selected">
               <option disabled value="0">Select</option>
@@ -21,7 +21,7 @@
             </select>
           </div>
         </div>
-      </form>
+      </nav>
     </div>
   </div>
 </template>
@@ -71,5 +71,17 @@ select {
   border-style: solid;
   border-width: 5px 6px 0 6px;
   border-color: #000000 transparent transparent transparent;
+}
+/* 新物品名稱容器 */
+.nameBox {
+  margin-bottom: 0.5rem;
+}
+/* 新物品照片容器 */
+.logoBox {
+  margin-bottom: 0.5rem;
+}
+/* 新物品狀態容器 */
+.statusBox {
+  display: flex;
 }
 </style>
