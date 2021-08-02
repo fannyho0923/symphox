@@ -5,11 +5,14 @@
         <ul class="ul">
           <li class="togggle li" @click="togggle">訂單管理</li>
           <li v-show="isShow" class="li" @click="searchOrder">訂單查詢</li>
-          <li v-show="isShow" class="li">新增訂單</li>
+          <li v-show="isShow" class="li" @click="addOrder">新增訂單</li>
         </ul>
       </nav>
       <div v-if="showSearch" class="selectBox">
         <SearchOrder :arr1="arr1" :arr2="arr2" />
+      </div>
+      <div v-if="showAdd" class="selectBox">
+        <AddOrder />
       </div>
     </div>
   </div>
@@ -44,6 +47,8 @@ export default {
     this.axios.get("../../static/data.json").then(response => {
       //   this.listData = response.data;
       this.data = response.data;
+
+      localStorage.setItem("data", JSON.stringify(this.data));
       console.log(response.data);
       for (var index = 0; index < this.data.length; index++) {
         if (
@@ -70,6 +75,12 @@ export default {
     searchOrder() {
       if (this.isShow) {
         this.showSearch = true;
+      }
+    },
+    // 新增訂單
+    addOrder() {
+      if (this.isShow) {
+        this.showAdd = true;
       }
     }
   }

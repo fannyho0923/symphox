@@ -18,18 +18,12 @@
             <th><p class="th">進行中</p></th>
           </tr>
           <div v-if="arr1">
-            <tr class="item " v-for="(item, index) in arr1" :key="index">
-              <div class="circle">
-                <img class="logo" :src="arr1[index].logo" alt="" />
-              </div>
-              <div class="content">
-                <div class="tit">
-                  <p class="green-text">{{ arr1[index].status.type }}</p>
-                  <p>預計出貨：{{ arr1[index].date }}</p>
-                </div>
-                <div>{{ arr1[index].name }}</div>
-              </div>
-              <div>></div>
+            <tr v-for="(item, index) in arr1" :key="index">
+              <Item
+                class="point"
+                :item="arr1[index]"
+                @cancel="cancel(index, arr1[index])"
+              />
             </tr>
           </div>
         </table>
@@ -59,6 +53,7 @@
 </template>
 
 <script>
+import Item from "@/components/Item.vue";
 export default {
   props: {
     arr1: {
@@ -73,10 +68,28 @@ export default {
       selected: 0
     };
   },
+  components: { Item },
   updated() {},
   created() {},
   computed: {},
-  methods: {}
+  methods: {
+    cancel(index, item) {
+      item.status.code = 3;
+      item.status.type = "已取消";
+      this.arr1.splice(index, 1);
+      this.arr2.push(item);
+      console.log(localStorage.getItem("data"));
+      var array = JSON.parse(localStorage.getItem("data"));
+      for (var index = 0; index < array.length; index++) {
+        if (array[index].name == item.name) {
+          array[index] = item;
+        }
+      }
+      console.log(array);
+      console.log(typeof array);
+      localStorage.setItem("data", JSON.stringify(array));
+    }
+  }
 };
 </script>
 
@@ -189,5 +202,9 @@ th {
 }
 .gray-color {
   filter: grayscale(100%);
+}
+/* 指標 */
+.point {
+  cursor: pointer;
 }
 </style>
