@@ -67,6 +67,8 @@ export default {
     togggle() {
       if (this.isShow) {
         this.isShow = false;
+        this.showAdd = false;
+        this.showSearch = false;
       } else {
         this.isShow = true;
       }
