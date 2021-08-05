@@ -3,7 +3,7 @@
     <div class="itemBox">
       <div class="scrollBox">
         <div v-for="(item, index) in count" :key="index">
-          <AddItem :i="index" @edit="edit" />
+          <AddItem :count="count" :i="index" @edit="edit" />
         </div>
       </div>
       <div class="addBtn" @click="addItem"><span class="span">+</span></div>
@@ -17,7 +17,7 @@ import AddItem from "@/components/AddItem.vue";
 export default {
   data() {
     return {
-      count: 1,
+      count: 0,
       arr: [],
       date: new Date()
     };
@@ -30,19 +30,40 @@ export default {
       this.count++;
     },
     addAllItem() {
-      console.log(this.arr);
+      var ans = [];
+      var i = 0;
+      if (this.arr) {
+        for (var index = 0; index < this.arr.length; index++) {
+          if (
+            this.arr[index].name &&
+            this.arr[index].logo &&
+            this.arr[index].status
+          ) {
+            ans.push(this.arr[index]);
+            i++;
+          }
+        }
+        if (i > 0) {
+          alert("成功新增 " + i + " 個商品");
+        }
+        // console.log(this.arr);
+        this.arr = [];
+        this.count = 0;
+
+        //   console.log(localStorage.getItem("data"));
+        var array = JSON.parse(localStorage.getItem("data"));
+        for (var index = 0; index < ans.length; index++) {
+          array.push(ans[index]);
+        }
+        //   console.log(typeof array);
+        localStorage.setItem("data", JSON.stringify(array));
+        console.log(localStorage.getItem("data"));
+
+        return;
+      }
     },
+
     edit(index, data, i) {
-      //   console.log(
-      //     index +
-      //       "," +
-      //       data +
-      //       "," +
-      //       i +
-      //       "," +
-      //       `${this.date.getFullYear() - 1911}/${this.date.getMonth() +
-      //         1}/${this.date.getDay()}`
-      //   );
       if (index < this.arr.length) {
         if (i === 1) {
           this.arr[index].name = data;
@@ -51,7 +72,7 @@ export default {
           this.arr[index].logo = data;
         }
         if (i === 3) {
-          var statuses = [];
+          var statuses = {};
           data = Number(data);
           switch (data) {
             case 1:
@@ -143,7 +164,7 @@ export default {
   top: 80%;
 }
 .scrollBox {
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 35rem;
 }
 /* 捲軸底色 */

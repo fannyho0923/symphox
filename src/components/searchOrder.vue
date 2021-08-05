@@ -69,9 +69,6 @@ export default {
     };
   },
   components: { Item },
-  updated() {},
-  created() {},
-  computed: {},
   methods: {
     cancel(index, item) {
       item.status.code = 3;
@@ -98,6 +95,7 @@ export default {
   /* background-color: cyan; */
   width: fit-content;
   display: flex;
+  margin-left: 2rem;
 }
 /* 下拉式選單 */
 select {
@@ -195,6 +193,7 @@ th {
 }
 /* 底線工具 */
 .bottom-line {
+  margin-left: 2rem;
   border-bottom: solid 1px #cdcdcd;
 }
 .green-text {

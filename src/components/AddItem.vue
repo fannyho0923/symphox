@@ -14,9 +14,9 @@
         <div class="triangle">
           <select class="select" v-model="selected" required @change="edit(3)">
             <option disabled value="0">Select</option>
-            <option value="1">進行中</option>
-            <option value="2">已完成</option>
-            <option value="3">全部顯示</option>
+            <option value="1">處理中</option>
+            <option value="2">已成立</option>
+            <option value="3">已取消</option>
           </select>
         </div>
       </div>
@@ -29,6 +29,9 @@ export default {
   props: {
     i: {
       type: Number
+    },
+    count: {
+      type: Number
     }
   },
   data() {
@@ -37,6 +40,15 @@ export default {
       name: "",
       logo: ""
     };
+  },
+  watch: {
+    selected() {
+      if (this.count < 1) {
+        this.selected = 0;
+        this.name = "";
+        this.logo = "";
+      }
+    }
   },
   methods: {
     edit(j) {
