@@ -51,24 +51,26 @@ export default {
           this.arr[index].logo = data;
         }
         if (i === 3) {
+          var statuses = [];
           data = Number(data);
           switch (data) {
             case 1:
-              this.arr[index].status.code = data;
-              this.arr[index].status.type = "處理中";
+              statuses.code = data;
+              statuses.type = "處理中";
               break;
             case 2:
-              this.arr[index].status.code = data;
-              this.arr[index].status.type = "已成立";
+              statuses.code = data;
+              statuses.type = "已成立";
               break;
             case 3:
-              this.arr[index].status.code = data;
-              this.arr[index].status.type = "已取消";
+              statuses.code = data;
+              statuses.type = "已取消";
               break;
           }
+          this.arr[index].status = statuses;
         }
         this.arr[index].date = `${this.date.getFullYear() -
-          1911}/${this.date.getMonth() + 1}/${this.date.getDay()}`;
+          1911}/${this.date.getMonth() + 1}/${this.date.getDay() + 1}`;
       }
       if (index >= this.arr.length) {
         var ans = {};
@@ -79,7 +81,7 @@ export default {
           ans.logo = data;
         }
         if (i === 3) {
-          var statuses = {};
+          var statuses = [];
           data = Number(data);
           switch (data) {
             case 1:
@@ -98,7 +100,7 @@ export default {
           ans.status = statuses;
         }
         ans.date = `${this.date.getFullYear() - 1911}/${this.date.getMonth() +
-          1}/${this.date.getDay()}`;
+          1}/${this.date.getDay() + 1}`;
         this.arr.push(ans);
       }
     }
